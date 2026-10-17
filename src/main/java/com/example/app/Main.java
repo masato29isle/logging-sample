@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 /**
  * ハンズオン用の起動クラス。Web フレームワークの代わりに、リクエストを受け付けて Controller に渡す役。
@@ -53,11 +54,21 @@ public class Main {
         pool.awaitTermination(30, TimeUnit.SECONDS);
     }
 
-    /** 1 件のリクエストを受け付けて Controller に渡す。リクエストごとに requestId を割り当てる。 */
+    /**
+     * 1 件のリクエストを受け付けて Controller に渡す。リクエストごとに requestId を割り当てる。
+     *
+     * <p>発展課題1: requestId を MDC に入れると、このスレッドで出す全ログ行に requestId が付く
+     * （出力位置は logback.xml の {@code %X{requestId}}）。スレッドは使い回されるので、終わったら必ず消す。
+     */
     private static void handleRequest(UserController controller, long userId, String name) {
         String requestId = UUID.randomUUID().toString().substring(0, 8);
-        log.info("リクエスト受付 requestId={} userId={}", requestId, userId);
-        String result = controller.register(userId, name);
-        log.info("リクエスト完了 requestId={} result={}", requestId, result);
+        MDC.put("requestId", requestId);
+        try {
+            log.info("リクエスト受付 userId={}", userId);
+            String result = controller.register(userId, name);
+            log.info("リクエスト完了 result={}", result);
+        } finally {
+            MDC.clear();
+        }
     }
 }

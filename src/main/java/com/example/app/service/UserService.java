@@ -25,12 +25,12 @@ public class UserService {
      * @throws UserRegistrationException データアクセスに失敗したとき
      */
     public void register(long userId, String name) {
-        // NOTE(Step 2-2): 文字列連結でログのメッセージを組み立てている
-        log.info("ユーザー登録開始 " + userId + " " + name);
+        // {} プレースホルダで値を渡す。key=value の形にすると検索しやすい
+        log.info("ユーザー登録開始 userId={} name={}", userId, name);
 
         if (userRepository.findById(userId).isPresent()) {
-            // NOTE(Step 2-3): 処理は続行できるが異常な状況。INFO でよいか？
-            log.info("ユーザーが重複しています userId={}", userId);
+            // 続行できるが異常な状況なので WARN
+            log.warn("ユーザーが重複しています userId={}", userId);
             throw new DuplicateUserException(userId);
         }
 
@@ -41,7 +41,7 @@ public class UserService {
             throw new UserRegistrationException("ユーザー登録処理でエラーが発生しました", e);
         }
 
-        // NOTE(Step 2-3): 正常に終わったのに ERROR で出している
-        log.error("ユーザー登録完了 userId={}", userId);
+        // 業務上の節目なので INFO
+        log.info("ユーザー登録完了 userId={}", userId);
     }
 }

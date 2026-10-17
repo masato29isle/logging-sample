@@ -26,11 +26,10 @@ public class UserRepository {
     public void save(long userId, String name) {
         try {
             db.insert(userId, name);
-            // NOTE(Step 2-4): 誰を保存したのか、この行だけでは分からない
-            log.info("ユーザーを保存しました");
+            log.info("ユーザーを保存しました userId={}", userId);
         } catch (SQLException e) {
-            // NOTE(Step 2-4): 例外メッセージにも誰の保存に失敗したのかが入っていない
-            throw new RepositoryException("ユーザーの保存に失敗しました", e);
+            // 例外メッセージにも ID を入れる。ログに出るのは受け止める側（Controller）なので、ここでは投げ直すだけ
+            throw new RepositoryException("ユーザーの保存に失敗しました userId=" + userId, e);
         }
     }
 }

@@ -36,10 +36,8 @@ public class UserController {
             // 業務上の想定内エラー。Service 側でログを出しているので、ここでは結果を返すだけ
             return "DUPLICATE";
         } catch (Exception e) {
-            // NOTE(Step 2-1): e.getMessage() だけを出しているので、原因（スタックトレース）が残らない
-            log.error("ユーザー登録でエラーが発生しました: " + e.getMessage());
-            // NOTE(Step 2-1): printStackTrace の直書き。ログの設定を通らず、標準エラー出力に直接出る
-            e.printStackTrace();
+            // 例外オブジェクトを最後の引数で渡すと、スタックトレース（Caused by を含む）がログに出る
+            log.error("ユーザー登録に失敗しました userId={}", userId, e);
             return "ERROR";
         }
     }

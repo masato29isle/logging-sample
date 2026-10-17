@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ログの出力先とフォーマットの設定。本編ではこのファイルは変更しない（発展課題1で1行足す） -->
+<!-- ログの出力先とフォーマットの設定。本編では変更しない。発展課題1でパターンに %X{requestId} を足した -->
 <configuration>
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <!-- 時刻 レベル ロガー名（クラス名） - メッセージ -->
-      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n</pattern>
+      <!-- 時刻 レベル [requestId] ロガー名（クラス名） - メッセージ
+           %X{requestId:-デフォルト値} は MDC の requestId を出す。未設定ならハイフン 1 文字を出す（発展課題1） -->
+      <pattern>%d{HH:mm:ss.SSS} %-5level [%X{requestId:--}] %logger{0} - %msg%n</pattern>
     </encoder>
   </appender>
 
