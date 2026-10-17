@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ログの出力先とフォーマットの設定。本編ではこのファイルは変更しない（発展課題1で1行足す） -->
+<configuration>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <!-- 時刻 レベル ロガー名（クラス名） - メッセージ -->
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- INFO 以上を出す。DEBUG の行を見たいときは DEBUG に変える -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>

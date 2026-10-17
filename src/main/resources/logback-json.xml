@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 発展課題2: 同じログを 1 行 1 JSON で出す設定。
+     次のように起動時に設定ファイルを切り替えて使う。
+       mvn -q compile exec:java -Dlogback.configurationFile=src/main/resources/logback-json.xml
+     MDC に入れた値（requestId など）は自動的に JSON のフィールドになる。 -->
+<configuration>
+  <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <!-- 読みやすさのため、使わないフィールドを省く -->
+      <fieldNames>
+        <version>[ignore]</version>
+        <levelValue>[ignore]</levelValue>
+      </fieldNames>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="JSON"/>
+  </root>
+</configuration>

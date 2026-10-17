@@ -1,0 +1,45 @@
+# ===== Maven =====
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# Maven Wrapper を導入した場合も jar 本体はコミットしない
+.mvn/wrapper/maven-wrapper.jar
+
+# ===== IntelliJ IDEA =====
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# ===== Eclipse / STS =====
+.classpath
+.project
+.settings/
+.factorypath
+bin/
+
+# ===== VS Code =====
+.vscode/
+
+# ===== NetBeans =====
+nbproject/private/
+nbbuild/
+nb-configuration.xml
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== その他 =====
+*.log
+*.class
+hs_err_pid*
+replay_pid*
