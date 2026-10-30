@@ -478,7 +478,7 @@ log.atWarn().addKeyValue("userId", userId).addKeyValue("reason", "DUPLICATE").lo
 
 ## 参考資料
 
-- SLF4J user manual（https://www.slf4j.org/manual.html）: プレースホルダ、例外の渡し方、fluent API の説明がある
-- Logback の Layouts（https://logback.qos.ch/manual/layouts.html）: `%d` や `%X{key}` などパターンの書式一覧。MDC の章（https://logback.qos.ch/manual/mdc.html）も同じマニュアル内にある
-- logstash-logback-encoder（https://github.com/logfellow/logstash-logback-encoder）: JSON 出力のエンコーダ。フィールドの追加や省略の設定方法
-- jq Manual（https://jqlang.org/manual/）: `select` や `-r` オプションの説明
+- [SLF4J user manual](https://www.slf4j.org/manual.html): プレースホルダ、例外の渡し方、fluent API の説明がある
+- [Logback Manual: Layouts](https://logback.qos.ch/manual/layouts.html): `%d` や `%X{key}` などパターンの書式一覧。[MDC の章](https://logback.qos.ch/manual/mdc.html)も同じマニュアル内にある
+- [logstash-logback-encoder](https://github.com/logfellow/logstash-logback-encoder): JSON 出力のエンコーダ。フィールドの追加や省略の設定方法
+- [jq Manual](https://jqlang.org/manual/): `select` や `-r` オプションの説明
